@@ -3,9 +3,11 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 from starlette.middleware.authentication import AuthenticationMiddleware
+from datetime import datetime
 
 class API:
     def __init__(self):
+        self.startTime = datetime.now()
         self.config_manager = ConfigManager()
         self.app = FastAPI()
         return
@@ -18,10 +20,11 @@ class API:
             allow_methods=["*"],
             allow_headers=["*"],
         )
-        
-        self.app.add_middleware(HTTPSRedirectMiddleware)
-        self.app.add_middleware(AuthenticationMiddleware)
-        
+
+        if(self.config_manager.config["environment"] == "production"):
+            self.app.add_middleware(AuthenticationMiddleware)
+            self.app.add_middleware(HTTPSRedirectMiddleware)
+
         @self.app.get("/")
         async def root():
             return {"message": "Welcome to the API!"}
@@ -30,3 +33,7 @@ class API:
 
 if __name__ == "__main__":
     api = API()
+    api.initRouter()
+    import uvicorn
+    uvicorn.run(api.app, host=api.config_manager.config['host'], port=api.config_manager.config['port'])
+    print(f"API running on {api.config_manager.config['host']}:{api.config_manager.config['port']}")
