@@ -1,6 +1,5 @@
-fastapi==0.116.1
-uvicorn==0.35.0
-crewai==0.150.0
-starlette==0.35.0
-datetime==4.7.0
-pydantic==2.6.2
+fastapi
+uvicorn
+crewai
+starlette
+pydantic
