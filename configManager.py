@@ -21,7 +21,7 @@ class ConfigManager:
         else:
             raise NotImplementedError("Unsupported operating system")
 
-        self.config_path = os.path.join(self.base_path, 'KernelJames', 'Services', 'SelfDevelopment', 'config.json')
+        self.config_path = os.path.join(self.base_path, 'KernelJames', 'services', 'SelfDevelopment', 'config.json')
 
         print(f"Config path set to: {self.config_path}")
 

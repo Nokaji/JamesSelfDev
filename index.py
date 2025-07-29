@@ -25,9 +25,13 @@ class API:
             self.app.add_middleware(AuthenticationMiddleware)
             self.app.add_middleware(HTTPSRedirectMiddleware)
 
+        from routes.crew_router import crew_router
+        self.app.include_router(crew_router, prefix="/crew", tags=["crew"])
+
         @self.app.get("/")
         async def root():
-            return {"message": "Welcome to the API!"}
+            return {"message": "Welcome to the SelfDevelopment API!",
+                    "endpoint": [route.path for route in self.app.routes]}
 
         print("API initialized with CORS, HTTPS redirect, and authentication middleware.")
 
