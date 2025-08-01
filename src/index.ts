@@ -30,7 +30,7 @@ class App {
     serve(
       {
         fetch: this.app.fetch,
-        // port,
+        port,
         // ...(ConfigManager.isProduction() && host !== "0.0.0.0" ? { hostname: host } : {})
       },
       (info) => {

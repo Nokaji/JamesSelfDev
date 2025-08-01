@@ -13,7 +13,7 @@ class ConfigManager {
             ? path.join(home, 'Library', 'Application Support')
             : path.join(home, '.config');
 
-        this.path = path.join(this.path, 'KernelJames', 'services', 'JamesSelfDev');
+        this.path = path.join(this.path, 'James', 'services', 'JamesSelfDev');
         if (!fs.existsSync(this.path)) fs.mkdirSync(this.path, { recursive: true });
         this.loadConfig();
     }
